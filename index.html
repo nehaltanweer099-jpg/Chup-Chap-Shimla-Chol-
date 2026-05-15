@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Week: Shimla? 🏔️</title>
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --danger: #ff7675;
+            --success: #55efc4;
+            --dark: #2d3436;
+        }
+
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #0f0c29;
+            background: linear-gradient(to bottom, #24243e, #302b63, #0f0c29);
+            color: white;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Floating Background Elements */
+        .cloud {
+            position: absolute; opacity: 0.3; font-size: 50px;
+            animation: floatCloud 20s linear infinite;
+        }
+        @keyframes floatCloud {
+            from { left: -100px; } to { left: 100vw; }
+        }
+
+        #main-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px 30px;
+            border-radius: 30px;
+            width: 85%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            z-index: 10;
+            transition: transform 0.3s ease;
+        }
+
+        h2 { font-size: 26px; margin-bottom: 30px; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+
+        .choice-btn {
+            display: block; width: 100%; padding: 15px; margin: 12px 0;
+            border: none; border-radius: 15px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white; font-size: 16px; font-weight: 600;
+            cursor: pointer; transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .choice-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        #no-btn {
+            background: rgba(255, 118, 117, 0.2);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+
+        #status-text {
+            height: 40px; margin-top: 20px; font-style: italic;
+            color: var(--secondary); font-size: 15px;
+        }
+
+        .final-trigger {
+            margin-top: 40px; padding: 15px 40px;
+            background: var(--success); color: var(--dark);
+            border-radius: 50px; border: none; font-weight: 800;
+            font-size: 18px; cursor: pointer;
+            box-shadow: 0 10px 20px rgba(85, 239, 196, 0.3);
+        }
+
+        /* Full Screen Success */
+        #success-page {
+            display: none; position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%; background: #fff;
+            z-index: 1000; flex-direction: column;
+            align-items: center; justify-content: center;
+            color: #2d3436; text-align: center;
+        }
+
+        .snow {
+            position: absolute; top: -20px; animation: snowFall linear infinite;
+        }
+        @keyframes snowFall { to { transform: translateY(110vh); } }
+    </style>
+</head>
+<body>
+
+<div class="cloud" style="top: 10%; animation-duration: 25s;">☁️</div>
+<div class="cloud" style="top: 30%; animation-duration: 18s; opacity: 0.1;">☁️</div>
+
+<div id="main-card">
+    <div id="icon-box" style="font-size: 60px; margin-bottom: 10px;">🏔️</div>
+    <h2>Next week 🏔️ jabi ki jabinaa??😒</h2>
+    
+    <button class="choice-btn" onclick="updateUI(1)">1. Haa ekdom jabo🦋</button>
+    <button class="choice-btn" onclick="updateUI(2)">2. Tui eshe maniyee niyee jaa 😤</button>
+    <button id="no-btn" class="choice-btn" onmouseover="dodge()" onclick="dodge()">3. Naa ekdom jabonaaa.... 🤫</button>
+    <button class="choice-btn" onclick="updateUI(4)">4. Tui ekla jaa, den r firish naa🙂</button>
+
+    <div id="status-text">Select an option to see my reaction...</div>
+
+    <button class="final-trigger" onclick="finish()">Final selection select kor 💯</button>
+</div>
+
+<div id="success-page">
+    <h1 style="font-size: 45px; margin: 0;">SHIMLA 🏔️</h1>
+    <h2 style="color: #636e72; font-weight: 400;">Next week - CONFIRMED!</h2>
+    <div style="font-size: 80px; margin: 20px;">❄️🚗🔥</div>
+    <p>Get ready for the best trip ever! 💯</p>
+</div>
+
+<script>
+    function updateUI(opt) {
+        const status = document.getElementById('status-text');
+        const icon = document.getElementById('icon-box');
+        const card = document.getElementById('main-card');
+
+        if(opt === 1) {
+            status.innerHTML = "Legendary arms-wide pose activated! 🕺✨";
+            icon.innerHTML = "🕺";
+            card.style.borderColor = "#55efc4";
+        } else if(opt === 2) {
+            status.innerHTML = "DDLJ train scene sequence starting... 🚂💨";
+            icon.innerHTML = "🚂";
+            card.style.borderColor = "#a29bfe";
+        } else if(opt === 4) {
+            status.innerHTML = "Emotional damage... 🎻 Sad music playing.";
+            icon.innerHTML = "🥺";
+            card.style.borderColor = "#ff7675";
+        }
+    }
+
+    function dodge() {
+        const btn = document.getElementById('no-btn');
+        const status = document.getElementById('status-text');
+        
+        // Move button to random spot
+        const x = Math.random() * (window.innerWidth - 150);
+        const y = Math.random() * (window.innerHeight - 50);
+        
+        btn.style.position = 'fixed';
+        btn.style.left = x + 'px';
+        btn.style.top = y + 'px';
+        btn.style.zIndex = '1000';
+        
+        status.innerHTML = "Error 404: Answer not found! Try again 😂";
+        status.style.color = "#ff7675";
+    }
+
+    function finish() {
+        const success = document.getElementById('success-page');
+        success.style.display = 'flex';
+        
+        // Add Snowflakes
+        for(let i=0; i<100; i++) {
+            let snow = document.createElement('div');
+            snow.className = 'snow';
+            snow.innerHTML = '❄️';
+            snow.style.left = Math.random() * 100 + 'vw';
+            snow.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            snow.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            snow.style.opacity = Math.random();
+            success.appendChild(snow);
+        }
+    }
+</script>
+
+</body>
+</html>
